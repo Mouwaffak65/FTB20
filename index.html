@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <script src="https://pl29777395.effectivecpmnetwork.com/4d/f5/4d/4df54dd9a287ea36c01df83c1276b505.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
     <title>FTB20 · Live Foot + Liens Suivre</title>
@@ -124,6 +123,28 @@
         .ad-mobile-compact .ad-cta {
             padding: 5px 14px;
             font-size: 0.75rem;
+        }
+
+        /* Zone pour les iframes publicitaires */
+        .ad-iframe-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 70px;
+            background: #f8faff;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .ad-iframe-wrapper iframe {
+            max-width: 100%;
+            border: none;
+        }
+
+        .ad-iframe-wrapper.social-bar {
+            min-height: 90px;
+            background: transparent;
         }
 
         /* ---------- HEADER ---------- */
@@ -645,17 +666,15 @@
         </div>
     </header>
 
-    <!-- BANNIÈRE PUBLICITAIRE #1 -->
-    <script>
-  atOptions = {
-    'key' : 'f5db9320c8347db7ffca032abc64ba08',
-    'format' : 'iframe',
-    'height' : 60,
-    'width' : 468,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f5db9320c8347db7ffca032abc64ba08/invoke.js"></script>
+    <!-- ===== BANNIÈRE PUBLICITAIRE #1 (Social Bar) ===== -->
+    <div class="ad-banner ad-horizontal" style="background: #f8faff; border-color: #d4a017;">
+        <span class="ad-label"><i class="fas fa-ad"></i> Social</span>
+        <div class="ad-content" style="flex: 1; justify-content: center;">
+            <div class="ad-iframe-wrapper social-bar" style="min-height: 80px; width: 100%;">
+                <script src="https://pl29777395.effectivecpmnetwork.com/4d/f5/4d/4df54dd9a287ea36c01df83c1276b505.js"></script>
+            </div>
+        </div>
+    </div>
 
     <!-- GRILLE PRINCIPALE : MATCHS + HIGHLIGHTS -->
     <div class="grid-2">
@@ -676,7 +695,7 @@
                         <span class="team"><i class="fas fa-shield-alt"></i> DR Congo</span>
                     </div>
                     <div class="match-score">0-0</div>
-                    <div class="match-status"><span class="live-dot"></span> 18h:00 </div>
+                    <div class="match-status"><span class="live-dot"></span> 18h:00</div>
                     <a href="https://live-soccer.tv/matches/portugal-vs-dr-congo/" target="_blank" class="btn-follow">
                         <i class="fas fa-eye"></i> Suivre
                     </a>
@@ -695,23 +714,27 @@
                         <i class="fas fa-eye"></i> Suivre
                     </a>
                 </div>
-
-               
             </div>
 
             <div class="more-btn"><i class="fas fa-plus-circle"></i> Voir plus de matchs</div>
 
-            <!-- BANNIÈRE publicitaire dans la carte matchs -->
-            <div class="ad-banner ad-mobile-compact" style="margin: 18px 0 0 0; border-radius: 20px;">
-                <span class="ad-label"><i class="fas fa-ad"></i> Sponsor</span>
-                <div class="ad-content">
-                    <i class="fas fa-futbol"></i>
-                    <span class="ad-text">
-                        Equipez-vous chez FootShop
-                        <small>Livraison offerte dès 50€</small>
-                    </span>
+            <!-- ===== BANNIÈRE publicitaire dans la carte matchs (Barner) ===== -->
+            <div class="ad-banner ad-mobile-compact" style="margin: 18px 0 0 0; border-radius: 20px; background: #fcf8f0; border-color: #facc15;">
+                <span class="ad-label"><i class="fas fa-ad"></i> Annonce</span>
+                <div class="ad-content" style="flex: 1; justify-content: center;">
+                    <div class="ad-iframe-wrapper" style="min-height: 70px; width: 100%;">
+                        <script>
+                            atOptions = {
+                                'key' : 'f5db9320c8347db7ffca032abc64ba08',
+                                'format' : 'iframe',
+                                'height' : 60,
+                                'width' : 468,
+                                'params' : {}
+                            };
+                        </script>
+                        <script src="https://www.highperformanceformat.com/f5db9320c8347db7ffca032abc64ba08/invoke.js"></script>
+                    </div>
                 </div>
-                <button class="ad-cta">Voir</button>
             </div>
         </div>
 
@@ -789,17 +812,23 @@
         </div>
     </div>
 
-    <!-- BANNIÈRE PUBLICITAIRE #2 -->
+    <!-- ===== BANNIÈRE PUBLICITAIRE #2 (Barner) ===== -->
     <div class="ad-banner" style="background: #fcf8f0; border-color: #facc15;">
         <span class="ad-label"><i class="fas fa-ad"></i> Partenaire</span>
-        <div class="ad-content">
-            <i class="fas fa-tv"></i>
-            <span class="ad-text">
-                Regardez les matchs en direct sur FootStream+
-                <small>HD · Sans pub · 1 mois offert</small>
-            </span>
+        <div class="ad-content" style="flex: 1; justify-content: center;">
+            <div class="ad-iframe-wrapper" style="min-height: 70px; width: 100%;">
+                <script>
+                    atOptions = {
+                        'key' : 'f5db9320c8347db7ffca032abc64ba08',
+                        'format' : 'iframe',
+                        'height' : 60,
+                        'width' : 468,
+                        'params' : {}
+                    };
+                </script>
+                <script src="https://www.highperformanceformat.com/f5db9320c8347db7ffca032abc64ba08/invoke.js"></script>
+            </div>
         </div>
-        <button class="ad-cta">Essayer</button>
     </div>
 
     <!-- SECTION INFOS FOOT -->
@@ -841,17 +870,14 @@
         </div>
     </div>
 
-    <!-- BANNIÈRE PUBLICITAIRE #3 -->
-    <div class="ad-banner" style="margin-top: 24px; background: #eef4fe;">
-        <span class="ad-label"><i class="fas fa-ad"></i> Publicité</span>
-        <div class="ad-content">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="ad-text">
-                Maillots officiels 2026 · Précommandez dès maintenant
-                <small>Jusqu’à -30% sur la boutique FTB20</small>
-            </span>
+    <!-- ===== BANNIÈRE PUBLICITAIRE #3 (Social Bar) ===== -->
+    <div class="ad-banner" style="margin-top: 24px; background: #eef4fe; border-color: #d4a017;">
+        <span class="ad-label"><i class="fas fa-ad"></i> Social</span>
+        <div class="ad-content" style="flex: 1; justify-content: center;">
+            <div class="ad-iframe-wrapper social-bar" style="min-height: 80px; width: 100%;">
+                <script src="https://pl29777395.effectivecpmnetwork.com/4d/f5/4d/4df54dd9a287ea36c01df83c1276b505.js"></script>
+            </div>
         </div>
-        <button class="ad-cta">Acheter</button>
     </div>
 
     <!-- FOOTER -->
