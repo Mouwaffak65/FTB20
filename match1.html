@@ -90,22 +90,23 @@
             font-size: 0.5rem;
         }
 
-        /* ---------- BANNIÈRE PUB #1 (HAUTE) ---------- */
-        .ad-top {
-            background: linear-gradient(135deg, #ffffff, #f8faff);
+        /* ---------- ZONE PUBLICITAIRE ---------- */
+        .ad-zone {
+            background: #ffffff;
             border-radius: 20px;
-            padding: 14px 20px;
-            margin-bottom: 22px;
+            padding: 12px 18px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
             border: 1px solid #e3e9f2;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            min-height: 80px;
         }
 
-        .ad-top .ad-label {
+        .ad-zone .ad-label {
             font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -114,55 +115,43 @@
             padding: 2px 12px;
             border-radius: 40px;
             font-weight: 600;
-        }
-
-        .ad-top .ad-content {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex: 1;
-            flex-wrap: wrap;
-        }
-
-        .ad-top .ad-content i {
-            font-size: 1.8rem;
-            color: #facc15;
-            width: 40px;
-            text-align: center;
-        }
-
-        .ad-top .ad-text {
-            font-weight: 500;
-            color: #0b1a2e;
-            font-size: 0.95rem;
-        }
-
-        .ad-top .ad-text small {
-            font-weight: 400;
-            color: #5f6f8a;
-            font-size: 0.8rem;
-            display: block;
-        }
-
-        .ad-top .ad-cta {
-            background: #0b1a2e;
-            color: white;
-            border: none;
-            padding: 7px 22px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.2s;
             white-space: nowrap;
         }
 
-        .ad-top .ad-cta:hover {
-            background: #facc15;
-            color: #0b1a2e;
+        .ad-zone .ad-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px;
+            width: 100%;
+            overflow: hidden;
         }
 
-        /* ---------- PLAYER UNIQUEMENT ---------- */
+        .ad-zone .ad-wrapper iframe {
+            max-width: 100%;
+            border: none;
+        }
+
+        .ad-zone.social {
+            background: #f8faff;
+            border-color: #d4a017;
+            min-height: 90px;
+        }
+
+        .ad-zone.barner {
+            background: #fcf8f0;
+            border-color: #facc15;
+        }
+
+        .ad-zone.bottom {
+            margin-bottom: 0;
+            margin-top: 20px;
+            background: #fcf8f0;
+            border-color: #facc15;
+        }
+
+        /* ---------- PLAYER ---------- */
         .player-wrapper {
             background: #0b1a2e;
             border-radius: 24px;
@@ -173,7 +162,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             width: 100%;
         }
 
@@ -208,77 +197,6 @@
             font-size: 0.9rem;
         }
 
-        /* ---------- BANNIÈRE PUB #2 (BASSE) ---------- */
-        .ad-bottom {
-            background: linear-gradient(135deg, #fcf8f0, #f8f4ea);
-            border-radius: 20px;
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-            border: 1px solid #f0e8d8;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-        }
-
-        .ad-bottom .ad-label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #8a7b5a;
-            background: #f5efe4;
-            padding: 2px 12px;
-            border-radius: 40px;
-            font-weight: 600;
-        }
-
-        .ad-bottom .ad-content {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex: 1;
-            flex-wrap: wrap;
-        }
-
-        .ad-bottom .ad-content i {
-            font-size: 1.8rem;
-            color: #d4a017;
-            width: 40px;
-            text-align: center;
-        }
-
-        .ad-bottom .ad-text {
-            font-weight: 500;
-            color: #0b1a2e;
-            font-size: 0.95rem;
-        }
-
-        .ad-bottom .ad-text small {
-            font-weight: 400;
-            color: #6b5f44;
-            font-size: 0.8rem;
-            display: block;
-        }
-
-        .ad-bottom .ad-cta {
-            background: #0b1a2e;
-            color: white;
-            border: none;
-            padding: 7px 22px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.2s;
-            white-space: nowrap;
-        }
-
-        .ad-bottom .ad-cta:hover {
-            background: #facc15;
-            color: #0b1a2e;
-        }
-
         /* ---------- RESPONSIVE ---------- */
         @media screen and (max-width: 600px) {
             .page {
@@ -298,31 +216,24 @@
                 padding: 3px 12px;
             }
 
-            .ad-top, .ad-bottom {
+            .ad-zone {
                 flex-direction: column;
                 align-items: stretch;
                 gap: 8px;
                 padding: 12px 14px;
+                min-height: 70px;
             }
 
-            .ad-top .ad-content i,
-            .ad-bottom .ad-content i {
-                font-size: 1.4rem;
-                width: 28px;
-            }
-            .ad-top .ad-text,
-            .ad-bottom .ad-text {
-                font-size: 0.85rem;
-            }
-            .ad-top .ad-text small,
-            .ad-bottom .ad-text small {
-                font-size: 0.7rem;
-            }
-            .ad-top .ad-cta,
-            .ad-bottom .ad-cta {
+            .ad-zone .ad-label {
                 align-self: flex-start;
-                padding: 5px 16px;
-                font-size: 0.7rem;
+            }
+
+            .ad-zone .ad-wrapper {
+                min-height: 50px;
+            }
+
+            .ad-zone.social {
+                min-height: 80px;
             }
 
             .player-placeholder i {
@@ -344,20 +255,16 @@
             .mini-header {
                 margin-bottom: 14px;
             }
-            .ad-top {
-                margin-bottom: 14px;
+            .ad-zone {
                 padding: 10px 12px;
+                margin-bottom: 14px;
             }
             .player-wrapper {
                 margin-bottom: 14px;
                 border-radius: 18px;
             }
-            .ad-bottom {
-                padding: 10px 12px;
-            }
         }
 
-        /* footer discret */
         .footer-mini {
             margin-top: 20px;
             text-align: center;
@@ -374,7 +281,7 @@
 
 <div class="page">
 
-    <!-- EN-TÊTE MINIMAL (pas de menu) -->
+    <!-- EN-TÊTE MINIMAL -->
     <div class="mini-header">
         <div class="logo">
             <i class="fas fa-futbol"></i> FTB20
@@ -385,41 +292,64 @@
         </div>
     </div>
 
-    <!-- BANNIÈRE PUBLICITAIRE #1 (HAUTE) -->
-    <div class="ad-top">
+
+    <!-- ===== BANNIÈRE PUBLICITAIRE #2 (Barner) ===== -->
+    <div class="ad-zone barner">
         <span class="ad-label"><i class="fas fa-ad"></i> Annonce</span>
-        <div class="ad-content">
-            <i class="fas fa-crown"></i>
-            <span class="ad-text">
-                Paris Sportif · Bonus de bienvenue
-                <small>Offre valable jusqu'au 30/06 · 18+</small>
-            </span>
+        <div class="ad-wrapper">
+            <script>
+                atOptions = {
+                    'key' : 'f5db9320c8347db7ffca032abc64ba08',
+                    'format' : 'iframe',
+                    'height' : 60,
+                    'width' : 468,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/f5db9320c8347db7ffca032abc64ba08/invoke.js"></script>
         </div>
-        <button class="ad-cta">Jouer</button>
     </div>
 
     <!-- PLAYER (intégration du match en direct) -->
     <div class="player-wrapper">
-        <!-- 
-            Remplacez le src ci-dessous par l'URL de votre stream.
-            Si vous n'avez pas de stream, un placeholder s'affichera.
-        -->
-       <iframe allow="autoplay; encrypted-media" allowfullscreen="true" class="" height="620px" id="streamFrame" rameborder="0" src="https://39.256529.sbs/albaplayer/ch1/?serv=0" width="100%"></iframe>
-
+        <iframe 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen="true" 
+            class="" 
+            height="620px" 
+            id="streamFrame" 
+            frameborder="0" 
+            src="https://39.256529.sbs/albaplayer/ch1/?serv=0" 
+            width="100%"
+        ></iframe>
     </div>
 
-    <!-- BANNIÈRE PUBLICITAIRE #2 (BASSE) -->
-    <div class="ad-bottom">
-        <span class="ad-label"><i class="fas fa-ad"></i> Sponsor</span>
-        <div class="ad-content">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="ad-text">
-                Maillots officiels 2026 · Précommandez
-                <small>Jusqu'à -30% sur la boutique FTB20</small>
-            </span>
+    <!-- ===== BANNIÈRE PUBLICITAIRE #3 (Barner - bas) ===== -->
+    <div class="ad-zone bottom">
+        <span class="ad-label"><i class="fas fa-ad"></i> Partenaire</span>
+        <div class="ad-wrapper">
+            <script>
+                atOptions = {
+                    'key' : 'f5db9320c8347db7ffca032abc64ba08',
+                    'format' : 'iframe',
+                    'height' : 60,
+                    'width' : 468,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/f5db9320c8347db7ffca032abc64ba08/invoke.js"></script>
         </div>
-        <button class="ad-cta">Acheter</button>
     </div>
+
+    <!-- ===== BANNIÈRE PUBLICITAIRE #4 (Social Bar - bas) ===== -->
+    <div class="ad-zone social" style="margin-top: 12px; margin-bottom: 0;">
+        <span class="ad-label"><i class="fas fa-ad"></i> Social</span>
+        <div class="ad-wrapper">
+            <script src="https://pl29777395.effectivecpmnetwork.com/4d/f5/4d/4df54dd9a287ea36c01df83c1276b505.js"></script>
+        </div>
+    </div>
+
+    <script src="https://pl29777395.effectivecpmnetwork.com/4d/f5/4d/4df54dd9a287ea36c01df83c1276b505.js"></script>
 
     <!-- FOOTER MINIMAL -->
     <div class="footer-mini">
