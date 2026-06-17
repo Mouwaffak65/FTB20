@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
+    <title>FTB20 · Match en direct</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: #0b1a2e;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .page {
+            max-width: 1100px;
+            width: 100%;
+            background: #f4f6fa;
+            border-radius: 32px;
+            padding: 24px 24px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        /* ---------- EN-TÊTE MINIMAL ---------- */
+        .mini-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0b1a2e;
+        }
+
+        .logo i {
+            color: #facc15;
+            font-size: 1.8rem;
+        }
+
+        .logo span {
+            background: #facc15;
+            color: #0b1a2e;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 40px;
+            margin-left: 4px;
+        }
+
+        .badge-live {
+            background: #e11d48;
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            animation: pulse 1.8s infinite;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; transform: scale(0.97); }
+            50% { opacity: 1; transform: scale(1.03); }
+            100% { opacity: 0.7; transform: scale(0.97); }
+        }
+
+        .badge-live i {
+            font-size: 0.5rem;
+        }
+
+        /* ---------- BANNIÈRE PUB #1 (HAUTE) ---------- */
+        .ad-top {
+            background: linear-gradient(135deg, #ffffff, #f8faff);
+            border-radius: 20px;
+            padding: 14px 20px;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            border: 1px solid #e3e9f2;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        .ad-top .ad-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #8a9bb8;
+            background: #f0f4fe;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+
+        .ad-top .ad-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+
+        .ad-top .ad-content i {
+            font-size: 1.8rem;
+            color: #facc15;
+            width: 40px;
+            text-align: center;
+        }
+
+        .ad-top .ad-text {
+            font-weight: 500;
+            color: #0b1a2e;
+            font-size: 0.95rem;
+        }
+
+        .ad-top .ad-text small {
+            font-weight: 400;
+            color: #5f6f8a;
+            font-size: 0.8rem;
+            display: block;
+        }
+
+        .ad-top .ad-cta {
+            background: #0b1a2e;
+            color: white;
+            border: none;
+            padding: 7px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .ad-top .ad-cta:hover {
+            background: #facc15;
+            color: #0b1a2e;
+        }
+
+        /* ---------- PLAYER UNIQUEMENT ---------- */
+        .player-wrapper {
+            background: #0b1a2e;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            margin-bottom: 22px;
+            width: 100%;
+        }
+
+        .player-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Fallback si pas d'iframe */
+        .player-placeholder {
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .player-placeholder i {
+            font-size: 4rem;
+            color: #facc15;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .player-placeholder h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .player-placeholder p {
+            color: #aab8d0;
+            font-size: 0.9rem;
+        }
+
+        /* ---------- BANNIÈRE PUB #2 (BASSE) ---------- */
+        .ad-bottom {
+            background: linear-gradient(135deg, #fcf8f0, #f8f4ea);
+            border-radius: 20px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            border: 1px solid #f0e8d8;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        .ad-bottom .ad-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #8a7b5a;
+            background: #f5efe4;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+
+        .ad-bottom .ad-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+
+        .ad-bottom .ad-content i {
+            font-size: 1.8rem;
+            color: #d4a017;
+            width: 40px;
+            text-align: center;
+        }
+
+        .ad-bottom .ad-text {
+            font-weight: 500;
+            color: #0b1a2e;
+            font-size: 0.95rem;
+        }
+
+        .ad-bottom .ad-text small {
+            font-weight: 400;
+            color: #6b5f44;
+            font-size: 0.8rem;
+            display: block;
+        }
+
+        .ad-bottom .ad-cta {
+            background: #0b1a2e;
+            color: white;
+            border: none;
+            padding: 7px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .ad-bottom .ad-cta:hover {
+            background: #facc15;
+            color: #0b1a2e;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media screen and (max-width: 600px) {
+            .page {
+                padding: 16px 14px 20px;
+                border-radius: 24px;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+            .logo i {
+                font-size: 1.4rem;
+            }
+
+            .badge-live {
+                font-size: 0.65rem;
+                padding: 3px 12px;
+            }
+
+            .ad-top, .ad-bottom {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+                padding: 12px 14px;
+            }
+
+            .ad-top .ad-content i,
+            .ad-bottom .ad-content i {
+                font-size: 1.4rem;
+                width: 28px;
+            }
+            .ad-top .ad-text,
+            .ad-bottom .ad-text {
+                font-size: 0.85rem;
+            }
+            .ad-top .ad-text small,
+            .ad-bottom .ad-text small {
+                font-size: 0.7rem;
+            }
+            .ad-top .ad-cta,
+            .ad-bottom .ad-cta {
+                align-self: flex-start;
+                padding: 5px 16px;
+                font-size: 0.7rem;
+            }
+
+            .player-placeholder i {
+                font-size: 2.8rem;
+            }
+            .player-placeholder h2 {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            body {
+                padding: 10px;
+            }
+            .page {
+                padding: 12px 10px 16px;
+                border-radius: 18px;
+            }
+            .mini-header {
+                margin-bottom: 14px;
+            }
+            .ad-top {
+                margin-bottom: 14px;
+                padding: 10px 12px;
+            }
+            .player-wrapper {
+                margin-bottom: 14px;
+                border-radius: 18px;
+            }
+            .ad-bottom {
+                padding: 10px 12px;
+            }
+        }
+
+        /* footer discret */
+        .footer-mini {
+            margin-top: 20px;
+            text-align: center;
+            color: #8a9bb8;
+            font-size: 0.7rem;
+            letter-spacing: 0.3px;
+        }
+        .footer-mini i {
+            color: #facc15;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <!-- EN-TÊTE MINIMAL (pas de menu) -->
+    <div class="mini-header">
+        <div class="logo">
+            <i class="fas fa-futbol"></i> FTB20
+            <span>LIVE</span>
+        </div>
+        <div class="badge-live">
+            <i class="fas fa-circle"></i> EN DIRECT
+        </div>
+    </div>
+
+    <!-- BANNIÈRE PUBLICITAIRE #1 (HAUTE) -->
+    <div class="ad-top">
+        <span class="ad-label"><i class="fas fa-ad"></i> Annonce</span>
+        <div class="ad-content">
+            <i class="fas fa-crown"></i>
+            <span class="ad-text">
+                Paris Sportif · Bonus de bienvenue
+                <small>Offre valable jusqu'au 30/06 · 18+</small>
+            </span>
+        </div>
+        <button class="ad-cta">Jouer</button>
+    </div>
+
+    <!-- PLAYER (intégration du match en direct) -->
+    <div class="player-wrapper">
+        <!-- 
+            Remplacez le src ci-dessous par l'URL de votre stream.
+            Si vous n'avez pas de stream, un placeholder s'affichera.
+        -->
+        <iframe 
+            src="https://www.youtube.com/embed/8BqH4yUXlEY?autoplay=1&mute=1" 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen
+            loading="lazy"
+        ></iframe>
+    </div>
+
+    <!-- BANNIÈRE PUBLICITAIRE #2 (BASSE) -->
+    <div class="ad-bottom">
+        <span class="ad-label"><i class="fas fa-ad"></i> Sponsor</span>
+        <div class="ad-content">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="ad-text">
+                Maillots officiels 2026 · Précommandez
+                <small>Jusqu'à -30% sur la boutique FTB20</small>
+            </span>
+        </div>
+        <button class="ad-cta">Acheter</button>
+    </div>
+
+    <!-- FOOTER MINIMAL -->
+    <div class="footer-mini">
+        <i class="fas fa-futbol"></i> FTB20 · Suivez le match en direct
+    </div>
+
+</div>
+
+</body>
+</html>
