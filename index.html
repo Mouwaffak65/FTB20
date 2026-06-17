@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
+    <title>FTB20 · Live Foot + Liens Suivre</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: #f4f6fa;
+            color: #1a2639;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+        }
+
+        .app {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ---------- BANNIÈRES PUBLICITAIRES ---------- */
+        .ad-banner {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 12px 18px;
+            margin: 12px 0 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            border: 1px solid #e3e9f2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: 0.2s;
+        }
+
+        .ad-banner:hover {
+            border-color: #facc15;
+        }
+
+        .ad-banner .ad-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #8a9bb8;
+            background: #f0f4fe;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+
+        .ad-banner .ad-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        .ad-banner .ad-content i {
+            font-size: 2rem;
+            color: #facc15;
+            width: 44px;
+            text-align: center;
+        }
+
+        .ad-banner .ad-text {
+            font-weight: 500;
+            color: #0b1a2e;
+            font-size: 1rem;
+        }
+
+        .ad-banner .ad-text small {
+            font-weight: 400;
+            color: #5f6f8a;
+            font-size: 0.85rem;
+            display: block;
+        }
+
+        .ad-banner .ad-cta {
+            background: #0b1a2e;
+            color: white;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .ad-banner .ad-cta:hover {
+            background: #facc15;
+            color: #0b1a2e;
+        }
+
+        .ad-horizontal {
+            background: linear-gradient(135deg, #fafcff 0%, #eef4fe 100%);
+            border-left: 4px solid #facc15;
+            border-radius: 20px;
+        }
+
+        .ad-mobile-compact .ad-content i {
+            font-size: 1.5rem;
+            width: 32px;
+        }
+        .ad-mobile-compact .ad-text {
+            font-size: 0.9rem;
+        }
+        .ad-mobile-compact .ad-cta {
+            padding: 5px 14px;
+            font-size: 0.75rem;
+        }
+
+        /* ---------- HEADER ---------- */
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: #0b1a2e;
+            padding: 16px 24px;
+            border-radius: 28px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 12px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            color: #facc15;
+            font-size: 2rem;
+        }
+
+        .logo span {
+            background: #facc15;
+            color: #0b1a2e;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 40px;
+            margin-left: 6px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header-actions button {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header-actions button:hover {
+            background: #facc15;
+            color: #0b1a2e;
+            border-color: #facc15;
+        }
+
+        /* ---------- GRILLE : MATCHS + HIGHLIGHTS ---------- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* ---------- CARTES ---------- */
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 20px 18px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #1e2a41;
+        }
+
+        .card-title i {
+            color: #facc15;
+            margin-right: 10px;
+        }
+
+        .badge-live {
+            background: #e11d48;
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 12px;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.7; transform: scale(0.95); }
+        }
+
+        /* ---------- LISTE MATCHS ---------- */
+        .match-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .match-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8faff;
+            padding: 12px 16px;
+            border-radius: 20px;
+            border-left: 5px solid #facc15;
+            transition: 0.15s;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .match-item:hover {
+            background: #eef4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
+        }
+
+        .match-teams {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            flex-wrap: wrap;
+        }
+
+        .match-teams .team {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .match-teams .team i {
+            font-size: 1.2rem;
+            color: #2c3e66;
+        }
+
+        .match-score {
+            font-weight: 700;
+            font-size: 1.3rem;
+            background: #0b1a2e;
+            color: white;
+            padding: 0 14px;
+            border-radius: 40px;
+            line-height: 2.1rem;
+            letter-spacing: 1px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .match-status {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #e11d48;
+            background: #ffe9ec;
+            padding: 3px 12px;
+            border-radius: 30px;
+        }
+
+        .match-status.ft {
+            color: #2b6e4f;
+            background: #e1f3ea;
+        }
+
+        /* ---------- BOUTON SUIVRE (lien href) ---------- */
+        .btn-follow {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #0b1a2e;
+            color: white;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-follow:hover {
+            background: #facc15;
+            color: #0b1a2e;
+            transform: scale(1.03);
+        }
+
+        .btn-follow i {
+            font-size: 0.8rem;
+        }
+
+        /* ---------- HIGHLIGHTS ---------- */
+        .highlight-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #fafcff;
+            padding: 10px 14px;
+            border-radius: 18px;
+            transition: 0.15s;
+            border: 1px solid #edf2f9;
+            flex-wrap: wrap;
+        }
+
+        .highlight-item:hover {
+            background: #f0f6ff;
+            border-color: #cbd9f0;
+        }
+
+        .highlight-item i {
+            font-size: 1.6rem;
+            color: #facc15;
+            width: 32px;
+            text-align: center;
+        }
+
+        .highlight-info {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .highlight-info h4 {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .highlight-info p {
+            font-size: 0.8rem;
+            color: #4b5a77;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ---------- BOUTON SUIVRE HIGHLIGHT (lien href) ---------- */
+        .btn-follow-hl {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #0b1a2e;
+            color: white;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-follow-hl:hover {
+            background: #facc15;
+            color: #0b1a2e;
+            transform: scale(1.03);
+        }
+
+        .btn-follow-hl i {
+            font-size: 0.7rem;
+        }
+
+        /* ---------- INFOS FOOT ---------- */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 24px;
+            padding: 18px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid #eaedf4;
+            transition: 0.2s;
+        }
+
+        .info-card:hover {
+            border-color: #facc15;
+        }
+
+        .info-card h3 {
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: #1e2a41;
+        }
+
+        .info-card h3 i {
+            color: #facc15;
+            font-size: 1.2rem;
+            width: 28px;
+        }
+
+        .info-card ul {
+            list-style: none;
+            font-size: 0.9rem;
+            line-height: 2;
+        }
+
+        .info-card ul li {
+            border-bottom: 1px solid #f0f3fa;
+            padding: 4px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .info-card .stat-value {
+            font-weight: 600;
+            color: #0b1a2e;
+        }
+
+        /* ---------- FOOTER ---------- */
+        .footer {
+            margin-top: 32px;
+            text-align: center;
+            color: #5f6f8a;
+            font-size: 0.85rem;
+            border-top: 1px solid #dde4ef;
+            padding-top: 24px;
+            letter-spacing: 0.3px;
+        }
+
+        .footer i {
+            color: #facc15;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media screen and (max-width: 820px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+                padding: 18px;
+            }
+
+            .header-actions {
+                justify-content: space-between;
+            }
+
+            .match-item {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .match-teams {
+                justify-content: center;
+            }
+
+            .match-score {
+                align-self: center;
+                width: fit-content;
+            }
+
+            .match-status {
+                align-self: center;
+            }
+
+            .btn-follow {
+                align-self: center;
+                justify-content: center;
+            }
+
+            .highlight-item {
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .btn-follow-hl {
+                align-self: center;
+            }
+
+            .info-section {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .ad-banner .ad-content i {
+                font-size: 1.6rem;
+                width: 36px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body { padding: 10px; }
+            .logo { font-size: 1.3rem; }
+            .header-actions button { font-size: 0.75rem; padding: 5px 10px; }
+            .info-section { grid-template-columns: 1fr; }
+            .card { padding: 16px 12px; }
+
+            .ad-banner {
+                padding: 10px 14px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            .ad-banner .ad-content {
+                gap: 10px;
+            }
+            .ad-banner .ad-content i {
+                font-size: 1.4rem;
+                width: 28px;
+            }
+            .ad-banner .ad-text {
+                font-size: 0.85rem;
+            }
+            .ad-banner .ad-text small {
+                font-size: 0.75rem;
+            }
+            .ad-banner .ad-cta {
+                align-self: flex-start;
+                padding: 5px 16px;
+                font-size: 0.75rem;
+            }
+            .ad-horizontal {
+                border-left-width: 3px;
+            }
+
+            .btn-follow {
+                font-size: 0.7rem;
+                padding: 5px 14px;
+            }
+            .btn-follow-hl {
+                font-size: 0.65rem;
+                padding: 4px 12px;
+            }
+        }
+
+        .more-btn {
+            background: transparent;
+            border: 1px dashed #bcc8df;
+            border-radius: 40px;
+            padding: 8px 0;
+            margin-top: 12px;
+            width: 100%;
+            font-weight: 500;
+            color: #2c3e66;
+            transition: 0.15s;
+            cursor: default;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .more-btn i { margin-left: 6px; font-size: 0.7rem; }
+        .more-btn:hover { background: #f4f9ff; border-color: #facc15; }
+
+        .live-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #e11d48;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulse 1.4s infinite;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-futbol"></i> FTB20
+            <span>LIVE</span>
+        </div>
+        <div class="header-actions">
+            <button><i class="fas fa-bolt"></i> Matchs</button>
+            <button><i class="fas fa-video"></i> Highlights</button>
+            <button><i class="fas fa-newspaper"></i> Actu</button>
+        </div>
+    </header>
+
+    <!-- BANNIÈRE PUBLICITAIRE #1 -->
+    <div class="ad-banner ad-horizontal">
+        <span class="ad-label"><i class="fas fa-ad"></i> Annonce</span>
+        <div class="ad-content">
+            <i class="fas fa-crown"></i>
+            <span class="ad-text">
+                Paris Sportif · Profitez d’un bonus de bienvenue
+                <small>Offre valable jusqu’au 30/06 · 18+</small>
+            </span>
+        </div>
+        <button class="ad-cta">Jouer</button>
+    </div>
+
+    <!-- GRILLE PRINCIPALE : MATCHS + HIGHLIGHTS -->
+    <div class="grid-2">
+        <!-- COLONNE MATCHS -->
+        <div class="card">
+            <div class="card-title">
+                <span><i class="fas fa-clock"></i> Matchs en direct</span>
+                <span class="badge-live"><i class="fas fa-circle" style="font-size: 0.5rem; margin-right: 4px;"></i> LIVE</span>
+            </div>
+
+            <!-- ===== LISTE DES MATCHS AVEC BOUTON SUIVRE (LIEN) ===== -->
+            <div class="match-list">
+                <!-- Match 1 -->
+                <div class="match-item">
+                    <div class="match-teams">
+                        <span class="team"><i class="fas fa-shield-alt"></i> PSG</span>
+                        <span style="color:#8a9bb8; font-weight:300;">vs</span>
+                        <span class="team"><i class="fas fa-shield-alt"></i> OM</span>
+                    </div>
+                    <div class="match-score">2-1</div>
+                    <div class="match-status"><span class="live-dot"></span> En direct</div>
+                    <a href="https://www.example.com/match/psg-om" target="_blank" class="btn-follow">
+                        <i class="fas fa-eye"></i> Suivre
+                    </a>
+                </div>
+
+                <!-- Match 2 -->
+                <div class="match-item">
+                    <div class="match-teams">
+                        <span class="team"><i class="fas fa-crown"></i> Real Madrid</span>
+                        <span style="color:#8a9bb8; font-weight:300;">vs</span>
+                        <span class="team"><i class="fas fa-crown"></i> Barça</span>
+                    </div>
+                    <div class="match-score">0-0</div>
+                    <div class="match-status"><span class="live-dot"></span> En direct</div>
+                    <a href="https://www.example.com/match/real-barca" target="_blank" class="btn-follow">
+                        <i class="fas fa-eye"></i> Suivre
+                    </a>
+                </div>
+
+                <!-- Match 3 -->
+                <div class="match-item">
+                    <div class="match-teams">
+                        <span class="team"><i class="fas fa-star"></i> Bayern</span>
+                        <span style="color:#8a9bb8; font-weight:300;">vs</span>
+                        <span class="team"><i class="fas fa-star"></i> Dortmund</span>
+                    </div>
+                    <div class="match-score">3-2</div>
+                    <div class="match-status ft">FT</div>
+                    <a href="https://www.example.com/match/bayern-dortmund" target="_blank" class="btn-follow">
+                        <i class="fas fa-eye"></i> Suivre
+                    </a>
+                </div>
+
+                <!-- Match 4 -->
+                <div class="match-item">
+                    <div class="match-teams">
+                        <span class="team"><i class="fas fa-gun"></i> Arsenal</span>
+                        <span style="color:#8a9bb8; font-weight:300;">vs</span>
+                        <span class="team"><i class="fas fa-gun"></i> Liverpool</span>
+                    </div>
+                    <div class="match-score">1-1</div>
+                    <div class="match-status"><span class="live-dot"></span> En direct</div>
+                    <a href="https://www.example.com/match/arsenal-liverpool" target="_blank" class="btn-follow">
+                        <i class="fas fa-eye"></i> Suivre
+                    </a>
+                </div>
+
+                <!-- Match 5 -->
+                <div class="match-item">
+                    <div class="match-teams">
+                        <span class="team"><i class="fas fa-flag"></i> Milan</span>
+                        <span style="color:#8a9bb8; font-weight:300;">vs</span>
+                        <span class="team"><i class="fas fa-flag"></i> Inter</span>
+                    </div>
+                    <div class="match-score">0-1</div>
+                    <div class="match-status ft">FT</div>
+                    <a href="https://www.example.com/match/milan-inter" target="_blank" class="btn-follow">
+                        <i class="fas fa-eye"></i> Suivre
+                    </a>
+                </div>
+            </div>
+
+            <div class="more-btn"><i class="fas fa-plus-circle"></i> Voir plus de matchs</div>
+
+            <!-- BANNIÈRE publicitaire dans la carte matchs -->
+            <div class="ad-banner ad-mobile-compact" style="margin: 18px 0 0 0; border-radius: 20px;">
+                <span class="ad-label"><i class="fas fa-ad"></i> Sponsor</span>
+                <div class="ad-content">
+                    <i class="fas fa-futbol"></i>
+                    <span class="ad-text">
+                        Equipez-vous chez FootShop
+                        <small>Livraison offerte dès 50€</small>
+                    </span>
+                </div>
+                <button class="ad-cta">Voir</button>
+            </div>
+        </div>
+
+        <!-- COLONNE HIGHLIGHTS -->
+        <div class="card">
+            <div class="card-title">
+                <span><i class="fas fa-film"></i> Highlights</span>
+                <i class="fas fa-chevron-right" style="color: #b0c0da; font-size: 0.9rem;"></i>
+            </div>
+
+            <!-- ===== LISTE DES HIGHLIGHTS AVEC BOUTON SUIVRE (LIEN) ===== -->
+            <div class="highlight-list">
+                <!-- Highlight 1 -->
+                <div class="highlight-item">
+                    <i class="fas fa-play-circle"></i>
+                    <div class="highlight-info">
+                        <h4>PSG 3-1 OM (résumé)</h4>
+                        <p><i class="far fa-clock"></i> Il y a 2h</p>
+                    </div>
+                    <a href="https://www.example.com/highlight/psg-om" target="_blank" class="btn-follow-hl">
+                        <i class="fas fa-eye"></i> Suivre
+                    </a>
+                </div>
+
+                <!-- Highlight 2 -->
+                <div class="highlight-item">
+                    <i class="fas fa-play-circle"></i>
+                    <div class="highlight-info">
+                        <h4>Real Madrid 2-0 Barça (buts)</h4>
+                        <p><i class="far fa-clock"></i> Il y a 5h</p>
+                    </div>
+                    <a href="https://www.example.com/highlight/real-barca" target="_blank" class="btn-follow-hl">
+                        <i class="fas fa-eye"></i> Suivre
+                    </a>
+                </div>
+
+                <!-- Highlight 3 -->
+                <div class="highlight-item">
+                    <i class="fas fa-play-circle"></i>
+                    <div class="highlight-info">
+                        <h4>Bayern 4-2 Dortmund (HL)</h4>
+                        <p><i class="far fa-clock"></i> Hier</p>
+                    </div>
+                    <a href="https://www.example.com/highlight/bayern-dortmund" target="_blank" class="btn-follow-hl">
+                        <i class="fas fa-eye"></i> Suivre
+                    </a>
+                </div>
+
+                <!-- Highlight 4 -->
+                <div class="highlight-item">
+                    <i class="fas fa-play-circle"></i>
+                    <div class="highlight-info">
+                        <h4>Arsenal 1-1 Liverpool (HL)</h4>
+                        <p><i class="far fa-clock"></i> Hier</p>
+                    </div>
+                    <a href="https://www.example.com/highlight/arsenal-liverpool" target="_blank" class="btn-follow-hl">
+                        <i class="fas fa-eye"></i> Suivre
+                    </a>
+                </div>
+
+                <!-- Highlight 5 -->
+                <div class="highlight-item">
+                    <i class="fas fa-play-circle"></i>
+                    <div class="highlight-info">
+                        <h4>Milan 0-1 Inter (but décisif)</h4>
+                        <p><i class="far fa-clock"></i> Avant-hier</p>
+                    </div>
+                    <a href="https://www.example.com/highlight/milan-inter" target="_blank" class="btn-follow-hl">
+                        <i class="fas fa-eye"></i> Suivre
+                    </a>
+                </div>
+            </div>
+
+            <div class="more-btn"><i class="fas fa-play-circle"></i> Tous les résumés</div>
+        </div>
+    </div>
+
+    <!-- BANNIÈRE PUBLICITAIRE #2 -->
+    <div class="ad-banner" style="background: #fcf8f0; border-color: #facc15;">
+        <span class="ad-label"><i class="fas fa-ad"></i> Partenaire</span>
+        <div class="ad-content">
+            <i class="fas fa-tv"></i>
+            <span class="ad-text">
+                Regardez les matchs en direct sur FootStream+
+                <small>HD · Sans pub · 1 mois offert</small>
+            </span>
+        </div>
+        <button class="ad-cta">Essayer</button>
+    </div>
+
+    <!-- SECTION INFOS FOOT -->
+    <div class="info-section">
+        <div class="info-card">
+            <h3><i class="fas fa-trophy"></i> Classement L1</h3>
+            <ul>
+                <li><span>1. PSG</span> <span class="stat-value">62 pts</span></li>
+                <li><span>2. Marseille</span> <span class="stat-value">49 pts</span></li>
+                <li><span>3. Monaco</span> <span class="stat-value">46 pts</span></li>
+                <li><span>4. Lille</span> <span class="stat-value">41 pts</span></li>
+                <li><span>5. Lyon</span> <span class="stat-value">39 pts</span></li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3><i class="fas fa-fire"></i> Buteur en tête</h3>
+            <ul>
+                <li><span>⚽ K. Mbappé</span> <span class="stat-value">21</span></li>
+                <li><span>⚽ A. Lacazette</span> <span class="stat-value">17</span></li>
+                <li><span>⚽ W. Ben Yedder</span> <span class="stat-value">14</span></li>
+                <li><span>⚽ J. David</span> <span class="stat-value">13</span></li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3><i class="fas fa-calendar-alt"></i> Prochains matchs</h3>
+            <ul>
+                <li><span>PSG - Real Madrid</span> <span class="stat-value">20:45</span></li>
+                <li><span>Marseille - Nice</span> <span class="stat-value">21:00</span></li>
+                <li><span>Lyon - Monaco</span> <span class="stat-value">17:00</span></li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3><i class="fas fa-medal"></i> Infos transferts</h3>
+            <ul>
+                <li><span>✅ Dembélé (PSG)</span> <span class="stat-value">Officiel</span></li>
+                <li><span>🔁 Kolo Muani (Eintracht)</span> <span class="stat-value">Rumeur</span></li>
+                <li><span>⭐ G. Ramos (Benfica)</span> <span class="stat-value">Suivi</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- BANNIÈRE PUBLICITAIRE #3 -->
+    <div class="ad-banner" style="margin-top: 24px; background: #eef4fe;">
+        <span class="ad-label"><i class="fas fa-ad"></i> Publicité</span>
+        <div class="ad-content">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="ad-text">
+                Maillots officiels 2026 · Précommandez dès maintenant
+                <small>Jusqu’à -30% sur la boutique FTB20</small>
+            </span>
+        </div>
+        <button class="ad-cta">Acheter</button>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <i class="fas fa-futbol"></i> FTB20 · Suivez le foot en direct · <i class="fas fa-circle" style="color: #e11d48; font-size: 0.45rem;"></i> 2026
+    </div>
+</div>
+
+<!-- Petit script pour les interactions du header -->
+<script>
+    (function() {
+        // Gestion des boutons du header (effet visuel)
+        const headerBtns = document.querySelectorAll('.header-actions button');
+        headerBtns.forEach((btn) => {
+            btn.addEventListener('click', function(e) {
+                this.style.transform = 'scale(0.94)';
+                setTimeout(() => { this.style.transform = 'scale(1)'; }, 120);
+                headerBtns.forEach(b => b.style.background = 'rgba(255,255,255,0.08)');
+                this.style.background = '#facc15';
+                this.style.color = '#0b1a2e';
+                const label = this.innerText.trim();
+                const badge = document.querySelector('.card-title .badge-live');
+                if (badge) {
+                    if (label.includes('Matchs')) badge.innerHTML = '<i class="fas fa-circle" style="font-size:0.5rem; margin-right:4px;"></i> LIVE';
+                    else if (label.includes('Highlights')) badge.innerHTML = '<i class="fas fa-circle" style="font-size:0.5rem; margin-right:4px;"></i> VIDÉO';
+                    else if (label.includes('Actu')) badge.innerHTML = '<i class="fas fa-circle" style="font-size:0.5rem; margin-right:4px;"></i> NEWS';
+                }
+            });
+        });
+        if (headerBtns.length > 0) {
+            headerBtns[0].style.background = '#facc15';
+            headerBtns[0].style.color = '#0b1a2e';
+        }
+
+        // Effet sur les cartes d'info
+        document.querySelectorAll('.info-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => { this.style.transform = 'scale(1)'; }, 150);
+            });
+        });
+    })();
+</script>
+
+</body>
+</html>
